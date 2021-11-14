@@ -1,48 +1,67 @@
-let weather = {
-  paris: {
-    temp: 19.7,
-    humidity: 80,
-  },
-  tokyo: {
-    temp: 17.3,
-    humidity: 50,
-  },
-  lisbon: {
-    temp: 30.2,
-    humidity: 20,
-  },
-  "san francisco": {
-    temp: 20.9,
-    humidity: 100,
-  },
-  moscow: {
-    temp: -5,
-    humidity: 20,
-  },
-};
+//-------WEATHER / CITY ---------
 
-function cityWeather() {
-  let city = prompt("Enter a city").trim().toLowerCase();
+function showTemperature(response) {
+  console.log(response);
+  console.log(response.data);
+  console.log(response.data.main.temp);
 
-  if (weather[city] !== undefined) {
-    let tempC = Math.round(weather[city].temp);
-    let tempF = Math.round((weather[city].temp * 9) / 5 + 32);
-    let humidity = weather[city].humidity;
+  let temp = document.querySelector("#temp");
+  let temperature = Math.round(response.data.main.temp);
+  let city = document.querySelector("#city-name");
+  let weatherDescription = document.querySelector("#weather-description");
+  let precipitation = document.querySelector("#precipitation");
+  let precipitationData = response.data.precipitation;
+  let humidity = document.querySelector("#humidity");
+  let windspeed = document.querySelector("#windspeed");
 
-    alert(
-      `It is currently ${tempC}°C (${tempF}°F) in ${city} with a humidity of ${humidity}%.`
-    );
+  temp.innerHTML = `${temperature}`;
+  city.innerHTML = response.data.name;
+  weatherDescription.innerHTML = response.data.weather[0].description;
+
+  if (precipitationData > 0) {
+    precipitation.innerHTML = response.data.precipitation;
   } else {
-    alert(
-      `Sorry, we don't know the weather for this city, try going to https://www.google.com/search?q=weather+${city}`
-    );
+    precipitation.innerHTML = 0;
   }
+
+  humidity.innerHTML = response.data.main.humidity;
+  windspeed.innerHTML = Math.round(response.data.wind.speed * 3.6);
 }
 
-//cityWeather();
+function handlePosition(position) {
+  console.log(position.coords.latitude);
+  console.log(position.coords.longitude);
 
-//⏰Feature #1
-//In your project, display the current date and time using JavaScript: Tuesday 16:00
+  let latitude = position.coords.latitude;
+  let longitude = position.coords.longitude;
+  let apiKey = `702dc019bcc0d6e4adaf624c3a66a5e5`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
+
+  axios.get(apiUrl).then(showTemperature);
+}
+
+function changeToCurrentPosition() {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(handlePosition);
+}
+
+function changeCity(event) {
+  event.preventDefault();
+  let input = document.querySelector("#city-search-input").value;
+  console.log(input);
+  let apiKey = `702dc019bcc0d6e4adaf624c3a66a5e5`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input}&units=metric&appid=${apiKey}`;
+
+  axios.get(apiUrl).then(showTemperature);
+}
+
+let currentLocation = document.querySelector("#current-location");
+currentLocation.addEventListener("click", changeToCurrentPosition);
+
+let chooseLocationForm = document.querySelector("#city-search");
+chooseLocationForm.addEventListener("submit", changeCity);
+
+//-----TIME FORMAT-----------
 
 function formatDay(date) {
   let currentDate = date.getDate();
@@ -119,44 +138,3 @@ day.innerHTML = formatDay(currentDate);
 
 let time = document.querySelector("#current-time");
 time.innerHTML = formatTime(currentDate);
-
-//🕵️‍♀️Feature #2
-//Add a search engine, when searching for a city (i.e. Paris), display the city name on the page after the user submits the form.
-function changeCity(event) {
-  event.preventDefault();
-  let city = document.querySelector("#city-name");
-  let input = document.querySelector("#city-search-input");
-  city.innerHTML = `${input.value}`;
-}
-
-let citySearchForm = document.querySelector("#city-search");
-citySearchForm.addEventListener("submit", changeCity);
-
-//🙀Bonus Feature
-//Display a fake temperature (i.e 17) in Celsius and add a link to convert it to Fahrenheit. When clicking on it, it should convert the temperature to Fahrenheit.
-//When clicking on Celsius, it should convert it back to Celsius.
-let tempC = 30;
-let celsius = document.querySelector("#celsius");
-celsius.innerHTML = `${tempC}°C`;
-let tempF = (tempC * 9) / 5 + 32;
-console.log(tempF);
-
-function changeTemparatureUnitFahrenheit(event) {
-  event.preventDefault();
-  let fahrenheit = document.querySelector("#fahrenheit");
-  fahrenheit.innerHTML = `${tempF}°F`;
-  celsius.innerHTML = `<a href=#>°C</a>`;
-}
-
-let fahrenheit = document.querySelector("#fahrenheit");
-fahrenheit.innerHTML = `<a href=#>°F</a>`;
-fahrenheit.addEventListener("click", changeTemparatureUnitFahrenheit);
-
-function changeTemparatureUnitCelsius(event) {
-  event.preventDefault();
-  let celsius = document.querySelector("#celsius");
-  celsius.innerHTML = `${tempC}°C`;
-  fahrenheit.innerHTML = `<a href=#>°F</a>`;
-}
-
-celsius.addEventListener("click", changeTemparatureUnitCelsius);
