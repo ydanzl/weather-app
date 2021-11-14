@@ -131,3 +131,9 @@ a:hover {
 .forecast {
   margin: 16px;
 }
+
+.footer {
+  position: relative;
+  top: 60px;
+  left: 195px;
+}
