@@ -113,9 +113,9 @@ a:hover {
 
 .temperature {
   color: #07a4b5;
-
   font-size: 45px;
   margin: 0 16px;
+  line-height: 1.2;
 }
 
 .units {
