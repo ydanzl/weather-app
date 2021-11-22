@@ -13,10 +13,16 @@ function showTemperature(response) {
   let precipitationData = response.data.precipitation;
   let humidity = document.querySelector("#humidity");
   let windspeed = document.querySelector("#windspeed");
+  let icon = document.querySelector("#weather-icon");
 
   temp.innerHTML = `${temperature}`;
   city.innerHTML = response.data.name;
   weatherDescription.innerHTML = response.data.weather[0].description;
+  icon.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  icon.setAttribute("alt", `${response.data.weather[0].description}`);
 
   if (precipitationData > 0) {
     precipitation.innerHTML = response.data.precipitation;
