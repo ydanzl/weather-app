@@ -5,8 +5,9 @@ function showTemperature(response) {
   console.log(response.data);
   console.log(response.data.main.temp);
 
+  tempC = response.data.main.temp;
   let temp = document.querySelector("#temp");
-  let temperature = Math.round(response.data.main.temp);
+  let temperature = Math.round(tempC);
   let city = document.querySelector("#city-name");
   let weatherDescription = document.querySelector("#weather-description");
   let precipitation = document.querySelector("#precipitation");
@@ -47,7 +48,6 @@ function handlePosition(position) {
 }
 
 function changeToCurrentPosition() {
-  event.preventDefault();
   navigator.geolocation.getCurrentPosition(handlePosition);
 }
 
@@ -66,6 +66,33 @@ currentLocation.addEventListener("click", changeToCurrentPosition);
 
 let chooseLocationForm = document.querySelector("#city-search");
 chooseLocationForm.addEventListener("submit", changeCity);
+
+//--------UNIT CONVERSION-----------
+
+let tempC = null;
+let temp = document.querySelector("#temp");
+temp.innerHTML = `${tempC}`;
+
+function changeTemparatureUnit(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temp");
+  let activeUnitElement = document.querySelector("#active-unit");
+  let inactiveUnitElement = document.querySelector("#inactive-unit");
+  let tempF = Math.round((tempC * 9) / 5 + 32);
+
+  if (inactiveUnitElement.innerHTML === "°F") {
+    temperatureElement.innerHTML = tempF;
+    activeUnitElement.innerHTML = "°F";
+    inactiveUnitElement.innerHTML = "°C";
+  } else {
+    temperatureElement.innerHTML = Math.round(tempC);
+    activeUnitElement.innerHTML = "°C";
+    inactiveUnitElement.innerHTML = "°F";
+  }
+}
+
+let inactiveUnitElement = document.querySelector("#inactive-unit");
+inactiveUnitElement.addEventListener("click", changeTemparatureUnit);
 
 //-----TIME FORMAT-----------
 

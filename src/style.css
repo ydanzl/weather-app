@@ -32,13 +32,18 @@ hr {
 a {
   color: #07a4b5;
   text-decoration: none;
-  font-weight: bold;
 }
 
 a:hover {
   color: #0b8c9b;
 }
 
+.active {
+  font-weight: 700;
+}
+.active:hover {
+  text-decoration: none;
+}
 .app-box {
   max-width: 600px;
   background: #f9fcfd;
@@ -104,6 +109,18 @@ a:hover {
 .icon {
   color: #07a4b5;
   margin: 16px;
+}
+
+.temperature {
+  color: #07a4b5;
+
+  font-size: 45px;
+  margin: 0 16px;
+}
+
+.units {
+  font-size: 45px;
+  font-weight: 700;
 }
 
 .weather-details {
