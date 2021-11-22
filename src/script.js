@@ -60,7 +60,14 @@ function changeCity(event) {
 
   axios.get(apiUrl).then(showTemperature);
 }
+function defaultBehavior() {
+  let city = "Vienna";
+  let apiKey = `702dc019bcc0d6e4adaf624c3a66a5e5`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+  axios.get(apiUrl).then(showTemperature);
+}
 
+defaultBehavior();
 let currentLocation = document.querySelector("#current-location");
 currentLocation.addEventListener("click", changeToCurrentPosition);
 
