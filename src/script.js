@@ -8,6 +8,7 @@ function showTemperature(response) {
   tempC = response.data.main.temp;
   let temp = document.querySelector("#temp");
   let temperature = Math.round(tempC);
+  let inactiveUnitElement = document.querySelector("#inactive-unit");
   let city = document.querySelector("#city-name");
   let weatherDescription = document.querySelector("#weather-description");
   let precipitation = document.querySelector("#precipitation");
@@ -16,7 +17,11 @@ function showTemperature(response) {
   let windspeed = document.querySelector("#windspeed");
   let icon = document.querySelector("#weather-icon");
 
-  temp.innerHTML = `${temperature}`;
+  if (inactiveUnitElement.innerHTML === "°F") {
+    temp.innerHTML = Math.round(tempC);
+  } else {
+    temp.innerHTML = Math.round((tempC * 9) / 5 + 32);
+  }
   city.innerHTML = response.data.name;
   weatherDescription.innerHTML = response.data.weather[0].description;
   icon.setAttribute(
