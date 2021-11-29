@@ -155,7 +155,7 @@ inactiveUnitElement.addEventListener("click", changeTemparatureUnit);
 
 //-----TIME FORMAT-----------
 
-function formatDay(date) {
+function formatDate(date) {
   let currentDate = date.getDate();
   let currentYear = date.getFullYear();
 
@@ -186,9 +186,9 @@ function formatDay(date) {
   ];
   let currentMonth = months[date.getMonth()];
 
-  let formatedDay = `${currentDay}, ${currentDate}.${currentMonth}.${currentYear}`;
+  let formatedDate = `${currentDay}, ${currentDate}.${currentMonth}.${currentYear}`;
 
-  return formatedDay;
+  return formatedDate;
 }
 
 function formatTime(date) {
