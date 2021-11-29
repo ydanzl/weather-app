@@ -1,6 +1,7 @@
 //-----FORECAST DUPLICATION-----------
 
 function displayForecast(response) {
+  console.log(response.data.daily);
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row forecast">`;
@@ -25,8 +26,6 @@ function displayForecast(response) {
 
   forecastElement.innerHTML = forecastHTML;
 }
-
-displayForecast();
 
 //-------WEATHER / CITY ---------
 
