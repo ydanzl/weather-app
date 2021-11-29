@@ -1,16 +1,27 @@
 //-----FORECAST DUPLICATION-----------
 
+function formatForecastDay(timestamp) {
+  let forecastDate = new Date(timestamp * 1000);
+  let forecastDay = forecastDate.getDay();
+  let days = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
+
+  return days[forecastDay];
+}
+
 function displayForecast(response) {
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row forecast">`;
 
-  forecast.forEach(function (forecastDay) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2 align-center">
-            <div class="forecast-date">${forecastDay.dt}</div>
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2 align-center">
+            <div class="forecast-date">${formatForecastDay(
+              forecastDay.dt
+            )}</div>
            <img
             src="https://openweathermap.org/img/wn/${
               forecastDay.weather[0].icon
@@ -26,6 +37,7 @@ function displayForecast(response) {
               forecastDay.temp.min
             )}°</span>
           </div>`;
+    }
   });
 
   forecastHTML = forecastHTML + `</div>`;
@@ -220,10 +232,10 @@ function formatTime(date) {
 
 let currentDate = new Date();
 
-console.log(formatDay(currentDate));
+console.log(formatDate(currentDate));
 
 let day = document.querySelector("#current-day");
-day.innerHTML = formatDay(currentDate);
+day.innerHTML = formatDate(currentDate);
 
 let time = document.querySelector("#current-time");
 time.innerHTML = formatTime(currentDate);
