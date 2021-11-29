@@ -153,6 +153,11 @@ a:hover {
 .forecast-date {
   font-weight: bold;
 }
+
+.forecast-icon {
+  width: 50px;
+}
+]
 .forecast-max {
   font-weight: normal;
 }

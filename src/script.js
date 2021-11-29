@@ -196,7 +196,12 @@ function displayForecast() {
       forecastHTML +
       `<div class="col-2 align-center">
             <div class="forecast-date">${day}</div>
-            <div class="forecast-icon">⛅</div>
+           <img
+            src="https://openweathermap.org/img/wn/10d@2x.png"
+            alt="rain"
+            class="forecast-icon"
+            id="forecast-icon"
+          />
             <span class="forecast-max">28° </span>
             <span class="forecast-min">20°</span>
           </div>`;
