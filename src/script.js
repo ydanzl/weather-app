@@ -158,9 +158,6 @@ inactiveUnitElement.addEventListener("click", changeTemparatureUnit);
 function formatDay(date) {
   let currentDate = date.getDate();
   let currentYear = date.getFullYear();
-  let currentHour = date.getHours();
-  let currentMinute = date.getMinutes();
-  let currentTimezone = date.getTimezoneOffset();
 
   let days = [
     "Sunday",
