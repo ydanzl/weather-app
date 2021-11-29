@@ -150,6 +150,15 @@ a:hover {
   margin: 16px;
 }
 
+.forecast-max {
+  font-weight: normal;
+}
+
+.forecast-min {
+  font-weight: lighter;
+  opacity: 0.8;
+}
+
 .footer {
   text-align: center;
   padding: 75px;
