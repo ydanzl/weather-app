@@ -1,24 +1,30 @@
 //-----FORECAST DUPLICATION-----------
 
 function displayForecast(response) {
-  console.log(response.data.daily);
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row forecast">`;
-  let days = ["THU", "FRI", "SAT", "SUN"];
-  days.forEach(function (day) {
+
+  forecast.forEach(function (forecastDay) {
     forecastHTML =
       forecastHTML +
       `<div class="col-2 align-center">
-            <div class="forecast-date">${day}</div>
+            <div class="forecast-date">${forecastDay.dt}</div>
            <img
-            src="https://openweathermap.org/img/wn/10d@2x.png"
+            src="https://openweathermap.org/img/wn/${
+              forecastDay.weather[0].icon
+            }@2x.png"
             alt="rain"
             class="forecast-icon"
             id="forecast-icon"
           />
-            <span class="forecast-max">28° </span>
-            <span class="forecast-min">20°</span>
+            <span class="forecast-max">${Math.round(
+              forecastDay.temp.max
+            )}° </span>
+            <span class="forecast-min">${Math.round(
+              forecastDay.temp.min
+            )}°</span>
           </div>`;
   });
 
