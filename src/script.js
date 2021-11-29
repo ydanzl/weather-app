@@ -57,8 +57,7 @@ function showTemperature(response) {
   let inactiveUnitElement = document.querySelector("#inactive-unit");
   let city = document.querySelector("#city-name");
   let weatherDescription = document.querySelector("#weather-description");
-  let precipitation = document.querySelector("#precipitation");
-  let precipitationData = response.data.precipitation;
+
   let humidity = document.querySelector("#humidity");
   let windspeed = document.querySelector("#windspeed");
   let icon = document.querySelector("#weather-icon");
@@ -75,12 +74,6 @@ function showTemperature(response) {
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   icon.setAttribute("alt", `${response.data.weather[0].description}`);
-
-  if (precipitationData > 0) {
-    precipitation.innerHTML = response.data.precipitation;
-  } else {
-    precipitation.innerHTML = 0;
-  }
 
   humidity.innerHTML = response.data.main.humidity;
   windspeed.innerHTML = Math.round(response.data.wind.speed * 3.6);
