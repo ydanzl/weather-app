@@ -150,6 +150,9 @@ a:hover {
   margin: 16px;
 }
 
+.forecast-date {
+  font-weight: bold;
+}
 .forecast-max {
   font-weight: normal;
 }

@@ -183,3 +183,28 @@ day.innerHTML = formatDay(currentDate);
 
 let time = document.querySelector("#current-time");
 time.innerHTML = formatTime(currentDate);
+
+//-----TFORECAST DUPLICATION-----------
+
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row forecast">`;
+  let days = ["THU", "FRI", "SAT", "SUN"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2 align-center">
+            <div class="forecast-date">${day}</div>
+            <div class="forecast-icon">⛅</div>
+            <span class="forecast-max">28° </span>
+            <span class="forecast-min">20°</span>
+          </div>`;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+
+  forecastElement.innerHTML = forecastHTML;
+}
+
+displayForecast();
